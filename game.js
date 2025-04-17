@@ -299,7 +299,14 @@ function resetGame() {
 // 게임 루프
 function gameLoop() {
     if(!isGameOver) {
-        movePiece(0, -1);
+        if(isValidMove(currentPiece.position.x, currentPiece.position.y - 1, currentPiece.position.z)) {
+            currentPiece.position.y -= 1;
+            currentPiece.mesh.position.y = currentPiece.position.y;
+        } else {
+            placePiece();
+            checkLines();
+            spawnNewPiece();
+        }
         checkGameOver();
     }
 }
